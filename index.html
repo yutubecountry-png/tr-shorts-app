@@ -65,10 +65,10 @@
 
         /* --- Hero Section --- */
         .hero {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
-            padding: 0 10%;
+            padding: 120px 10% 50px;
             background: radial-gradient(circle at 70% 50%, rgba(218, 165, 32, 0.1) 0%, transparent 50%);
         }
 
@@ -77,7 +77,7 @@
         }
 
         .hero-content h1 {
-            font-size: 64px;
+            font-size: clamp(40px, 6vw, 64px);
             line-height: 1.1;
             margin-bottom: 20px;
             font-weight: 900;
@@ -104,13 +104,14 @@
             width: 100%;
             max-width: 600px;
             filter: drop-shadow(0 20px 50px rgba(0,0,0,0.5));
+            border-radius: 20px;
         }
 
         .btn {
             display: inline-block;
-            padding: 15px 40px;
+            padding: 18px 45px;
             background: linear-gradient(45deg, var(--primary), var(--secondary));
-            color: #000;
+            color: #000 !important;
             text-decoration: none;
             font-weight: 900;
             border-radius: 50px;
@@ -181,9 +182,8 @@
         }
 
         /* Mobile Adjustments */
-        @media (max-width: 768px) {
-            .hero { flex-direction: column; text-align: center; padding-top: 150px; height: auto; }
-            .hero-content h1 { font-size: 40px; }
+        @media (max-width: 992px) {
+            .hero { flex-direction: column; text-align: center; height: auto; }
             .hero-image { justify-content: center; margin-top: 50px; }
             nav { display: none; }
         }
@@ -201,14 +201,15 @@
         </nav>
     </header>
 
-    <section class="hero">
+    <section class="hero" id="about">
         <div class="hero-content">
             <h1>Kısa Dramaların <span>Premium</span> Dünyası</h1>
             <p>Dakikalar içinde dev hikayeler. TR-Shorts ile en sevdiğin diziler her an cebinde, reklamsız ve kesintisiz.</p>
             <a href="#" class="btn">Google Play'den İndir</a>
         </div>
         <div class="hero-image">
-            <img src="../trshorts_web_mockup_1778580641475.png" alt="TR-Shorts Mockup">
+            <!-- GÖRSEL YOLU DÜZELTİLDİ -->
+            <img src="trshorts_web_mockup_1778580641475.png" alt="TR-Shorts Mockup">
         </div>
     </section>
 
