@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TR-Shorts | Kısa Dramaların Yeni Dünyası</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FFD700;
+            --secondary: #DAA520;
+            --bg: #050505;
+            --card: #111;
+            --text: #ffffff;
+            --text-dim: #888;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- Header --- */
+        header {
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: -1px;
+            color: var(--primary);
+        }
+
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 10%;
+            background: radial-gradient(circle at 70% 50%, rgba(218, 165, 32, 0.1) 0%, transparent 50%);
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 64px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            font-weight: 900;
+        }
+
+        .hero-content h1 span {
+            color: var(--primary);
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            color: var(--text-dim);
+            margin-bottom: 40px;
+            max-width: 500px;
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 600px;
+            filter: drop-shadow(0 20px 50px rgba(0,0,0,0.5));
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: #000;
+            text-decoration: none;
+            font-weight: 900;
+            border-radius: 50px;
+            transition: 0.3s;
+            box-shadow: 0 10px 30px rgba(218, 165, 32, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(218, 165, 32, 0.5);
+        }
+
+        /* --- Features --- */
+        .features {
+            padding: 100px 10%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feat-card {
+            background: var(--card);
+            padding: 40px;
+            border-radius: 30px;
+            border: 1px solid #222;
+            transition: 0.3s;
+        }
+
+        .feat-card:hover {
+            border-color: var(--primary);
+            transform: scale(1.05);
+        }
+
+        .feat-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .feat-card p {
+            color: var(--text-dim);
+        }
+
+        /* --- Footer / Policy --- */
+        footer {
+            padding: 100px 10% 50px;
+            background: #000;
+            text-align: center;
+        }
+
+        .policy-box {
+            background: #111;
+            padding: 50px;
+            border-radius: 30px;
+            text-align: left;
+            margin-bottom: 50px;
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #222;
+        }
+
+        .policy-box h2 { margin-bottom: 20px; color: var(--primary); }
+        .policy-box p { margin-bottom: 15px; color: var(--text-dim); font-size: 14px; }
+
+        .contact-info {
+            margin-top: 40px;
+            color: var(--text-dim);
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .hero { flex-direction: column; text-align: center; padding-top: 150px; height: auto; }
+            .hero-content h1 { font-size: 40px; }
+            .hero-image { justify-content: center; margin-top: 50px; }
+            nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">TR-SHORTS</div>
+        <nav>
+            <a href="#about">Hakkımızda</a>
+            <a href="#features">Özellikler</a>
+            <a href="#privacy">Gizlilik Politikası</a>
+            <a href="#contact">Destek</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Kısa Dramaların <span>Premium</span> Dünyası</h1>
+            <p>Dakikalar içinde dev hikayeler. TR-Shorts ile en sevdiğin diziler her an cebinde, reklamsız ve kesintisiz.</p>
+            <a href="#" class="btn">Google Play'den İndir</a>
+        </div>
+        <div class="hero-image">
+            <img src="../trshorts_web_mockup_1778580641475.png" alt="TR-Shorts Mockup">
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="feat-card">
+            <h3>Hızlı İzle</h3>
+            <p>1-2 dakikalık bölümlerle vaktini en iyi şekilde değerlendir. Metroda, otobüste veya molada keyfine bak.</p>
+        </div>
+        <div class="feat-card">
+            <h3>4K Kalite</h3>
+            <p>Tüm içeriklerimiz en yüksek çözünürlükte, profesyonel ekipler tarafından hazırlanmıştır.</p>
+        </div>
+        <div class="feat-card">
+            <h3>VIP Ayrıcalığı</h3>
+            <p>Sınırsız erişim ve özel içeriklerle deneyimini bir üst seviyeye taşı.</p>
+        </div>
+    </section>
+
+    <section id="privacy" style="padding: 0 10%;">
+        <div class="policy-box">
+            <h2>Gizlilik Politikası</h2>
+            <p>Son Güncelleme: 12 Mayıs 2026</p>
+            <p>TR-Shorts olarak gizliliğinize önem veriyoruz. Bu politika, uygulamamızı kullandığınızda verilerinizin nasıl işlendiğini açıklar.</p>
+            <p><strong>1. Toplanan Veriler:</strong> Uygulamamız profil oluşturmanız için e-posta adresinizi ve izleme geçmişinizi toplar. Bu veriler size daha iyi öneriler sunmak amacıyla kullanılır.</p>
+            <p><strong>2. Veri Güvenliği:</strong> Verileriniz Supabase altyapısı üzerinde yüksek güvenlikli sunucularda saklanmaktadır.</p>
+            <p><strong>3. Üçüncü Taraflar:</strong> Google Play Hizmetleri ve Firebase, uygulama performansını ölçmek ve bildirim göndermek için anonim veriler toplayabilir.</p>
+            <p><strong>4. İletişim:</strong> Gizlilik politikamız hakkında sorularınız için support@arananfilms.com adresinden bize ulaşabilirsiniz.</p>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="logo" style="margin-bottom: 20px;">TR-SHORTS</div>
+        <p>ArananFilms Production © 2026</p>
+        <div class="contact-info">
+            <p>Destek: support@arananfilms.com</p>
+            <p>Adres: İstanbul, Türkiye</p>
+        </div>
+    </footer>
+
+</body>
+</html>
