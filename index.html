@@ -4,34 +4,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TR-Shorts | Kısa Dramaların Yeni Dünyası</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --primary: #FFD700;
-            --secondary: #DAA520;
-            --bg: #050505;
-            --card: #111;
-            --text: #ffffff;
-            --text-dim: #888;
+            --primary: #E50914; /* Netflix Red */
+            --accent: #FFD700; /* Gold */
+            --bg: #030303;
+            --surface: rgba(18, 18, 18, 0.7);
+            --border: rgba(255, 255, 255, 0.06);
+            --text-main: #FFFFFF;
+            --text-muted: #8E8E93;
+            --glow: rgba(229, 9, 20, 0.15);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
         }
 
         body {
             background-color: var(--bg);
-            color: var(--text);
+            color: var(--text-main);
             line-height: 1.6;
             overflow-x: hidden;
         }
 
+        /* --- Custom Scrollbar --- */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #080808;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #222;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+
+        /* --- Background Effects --- */
+        .ambient-bg {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(229, 9, 20, 0.12) 0%, transparent 70%);
+            top: -200px;
+            right: -100px;
+            z-index: 0;
+            pointer-events: none;
+            filter: blur(80px);
+        }
+
+        .ambient-bg-left {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.05) 0%, transparent 70%);
+            top: 600px;
+            left: -200px;
+            z-index: 0;
+            pointer-events: none;
+            filter: blur(80px);
+        }
+
         /* --- Header --- */
         header {
-            padding: 20px 5%;
+            padding: 24px 8%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -39,28 +87,68 @@
             width: 100%;
             top: 0;
             z-index: 1000;
-            background: rgba(5, 5, 5, 0.8);
-            backdrop-filter: blur(10px);
+            background: rgba(3, 3, 3, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s ease;
         }
 
         .logo {
-            font-size: 24px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-text {
+            color: #fff;
             font-weight: 900;
-            letter-spacing: -1px;
+            font-size: 24px;
+            letter-spacing: -1.5px;
+            text-transform: uppercase;
+        }
+
+        .logo-text span {
             color: var(--primary);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 32px;
         }
 
         nav a {
-            color: var(--text);
+            color: var(--text-muted);
             text-decoration: none;
-            margin-left: 30px;
             font-size: 14px;
             font-weight: 600;
-            transition: 0.3s;
+            transition: all 0.3s ease;
         }
 
         nav a:hover {
+            color: #fff;
+        }
+
+        nav a.active {
             color: var(--primary);
+        }
+
+        .btn-nav {
+            background: var(--primary);
+            color: #fff;
+            padding: 10px 22px;
+            border-radius: 12px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(229, 9, 20, 0.3);
+        }
+
+        .btn-nav:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(229, 9, 20, 0.5);
+            background: #ff1c27;
         }
 
         /* --- Hero Section --- */
@@ -68,245 +156,828 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
-            padding: 120px 10% 50px;
-            background: radial-gradient(circle at 70% 50%, rgba(218, 165, 32, 0.1) 0%, transparent 50%);
+            padding: 140px 8% 80px;
+            position: relative;
+            z-index: 10;
+            gap: 5%;
         }
 
         .hero-content {
-            flex: 1;
+            flex: 1.2;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(229, 9, 20, 0.1);
+            border: 1px solid rgba(229, 9, 20, 0.2);
+            padding: 8px 16px;
+            border-radius: 100px;
+            color: var(--primary);
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 24px;
         }
 
         .hero-content h1 {
-            font-size: clamp(40px, 6vw, 64px);
+            font-size: clamp(38px, 5.5vw, 68px);
             line-height: 1.1;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
             font-weight: 900;
+            letter-spacing: -2px;
         }
 
-        .hero-content h1 span {
+        .hero-content h1 span.gradient {
+            background: linear-gradient(135deg, #fff 30%, #a0a0a0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-content h1 span.red {
             color: var(--primary);
+            text-shadow: 0 0 40px rgba(229, 9, 20, 0.3);
         }
 
         .hero-content p {
             font-size: 18px;
-            color: var(--text-dim);
+            color: var(--text-muted);
             margin-bottom: 40px;
-            max-width: 500px;
+            max-width: 540px;
+            line-height: 1.7;
+        }
+
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 36px;
+            background: linear-gradient(135deg, #E50914 0%, #b0060e 100%);
+            color: #fff;
+            text-decoration: none;
+            font-weight: 800;
+            border-radius: 16px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 25px rgba(229, 9, 20, 0.35);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(229, 9, 20, 0.5);
+            background: linear-gradient(135deg, #ff1e28 0%, #d60a13 100%);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 18px 32px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
         }
 
         .hero-image {
-            flex: 1;
+            flex: 0.8;
             display: flex;
-            justify-content: flex-end;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .phone-mockup-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 320px;
+        }
+
+        .phone-mockup-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: -20px;
+            background: radial-gradient(circle, rgba(229, 9, 20, 0.3) 0%, transparent 70%);
+            z-index: -1;
+            filter: blur(20px);
         }
 
         .hero-image img {
             width: 100%;
-            max-width: 600px;
-            filter: drop-shadow(0 20px 50px rgba(0,0,0,0.5));
-            border-radius: 20px;
+            border-radius: 40px;
+            border: 6px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8);
+            transition: transform 0.5s ease;
         }
 
-        .btn {
-            display: inline-block;
-            padding: 18px 45px;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            color: #000 !important;
-            text-decoration: none;
-            font-weight: 900;
-            border-radius: 50px;
-            transition: 0.3s;
-            box-shadow: 0 10px 30px rgba(218, 165, 32, 0.3);
-        }
-
-        .btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(218, 165, 32, 0.5);
+        .hero-image:hover img {
+            transform: translateY(-8px) rotate(1deg);
         }
 
         /* --- Features --- */
         .features {
-            padding: 100px 10%;
+            padding: 120px 8%;
+            background: #060606;
+            position: relative;
+            z-index: 10;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+        .section-header h2 {
+            font-size: clamp(32px, 4vw, 48px);
+            font-weight: 900;
+            letter-spacing: -1.5px;
+            margin-bottom: 16px;
+        }
+
+        .section-header h2 span {
+            color: var(--primary);
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 16px;
+            max-width: 580px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
         }
 
         .feat-card {
-            background: var(--card);
-            padding: 40px;
-            border-radius: 30px;
-            border: 1px solid #222;
-            transition: 0.3s;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 40px 30px;
+            border-radius: 24px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
         }
 
         .feat-card:hover {
-            border-color: var(--primary);
-            transform: scale(1.05);
+            border-color: rgba(229, 9, 20, 0.3);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(229, 9, 20, 0.06);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .feat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 14px;
+            background: rgba(229, 9, 20, 0.1);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 24px;
         }
 
         .feat-card h3 {
-            font-size: 24px;
-            margin-bottom: 15px;
-            color: var(--primary);
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #fff;
         }
 
         .feat-card p {
-            color: var(--text-dim);
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.6;
         }
 
-        /* --- Footer / Policy --- */
-        footer {
-            padding: 100px 10% 50px;
-            background: #000;
+        /* --- VIP Packages Section --- */
+        .vip-section {
+            padding: 120px 8%;
+            position: relative;
+            z-index: 10;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .price-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 28px;
+            padding: 45px 30px;
             text-align: center;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
         }
 
-        .policy-box {
-            background: #111;
-            padding: 50px;
-            border-radius: 30px;
+        .price-card.popular {
+            border-color: var(--accent);
+            background: linear-gradient(180deg, rgba(255, 215, 0, 0.04) 0%, rgba(18, 18, 18, 0.7) 100%);
+            transform: scale(1.03);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: #000;
+            font-size: 12px;
+            font-weight: 800;
+            padding: 6px 16px;
+            border-radius: 100px;
+            letter-spacing: 1px;
+        }
+
+        .price-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .price-card.popular:hover {
+            transform: translateY(-5px) scale(1.03);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.1);
+        }
+
+        .price-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .price-card.popular .price-name {
+            color: var(--accent);
+        }
+
+        .price-val {
+            font-size: 42px;
+            font-weight: 900;
+            color: #fff;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .price-period {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        .price-features {
+            list-style: none;
+            margin-bottom: 35px;
             text-align: left;
-            margin-bottom: 50px;
-            max-height: 400px;
-            overflow-y: auto;
-            border: 1px solid #222;
         }
 
-        .policy-box h2 { margin-bottom: 20px; color: var(--primary); }
-        .policy-box p { margin-bottom: 15px; color: var(--text-dim); font-size: 14px; }
-
-        .contact-info {
-            margin-top: 40px;
-            color: var(--text-dim);
+        .price-features li {
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: #ccc;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        /* Mobile Adjustments */
+        .price-features li::before {
+            content: '✓';
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .price-card.popular .price-features li::before {
+            color: var(--accent);
+        }
+
+        .btn-price {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 14px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .btn-price:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        .price-card.popular .btn-price {
+            background: var(--accent);
+            color: #000;
+            border: none;
+        }
+
+        .price-card.popular .btn-price:hover {
+            background: #fff;
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.3);
+        }
+
+        /* --- Privacy / Legal / Delete Account --- */
+        .legal-section {
+            padding: 100px 8%;
+            background: #060606;
+            border-top: 1px solid var(--border);
+        }
+
+        .legal-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .legal-menu {
+            position: sticky;
+            top: 120px;
+            height: fit-content;
+        }
+
+        .legal-menu h3 {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 30px;
+            letter-spacing: -0.5px;
+        }
+
+        .legal-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .legal-tab-btn {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            padding: 18px 24px;
+            border-radius: 16px;
+            font-size: 15px;
+            font-weight: 700;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .legal-tab-btn:hover {
+            background: rgba(255, 255, 255, 0.02);
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+
+        .legal-tab-btn.active {
+            background: rgba(229, 9, 20, 0.06);
+            border-color: rgba(229, 9, 20, 0.3);
+            color: #fff;
+        }
+
+        .legal-tab-btn span.arrow {
+            opacity: 0;
+            transition: all 0.3s ease;
+            color: var(--primary);
+        }
+
+        .legal-tab-btn.active span.arrow {
+            opacity: 1;
+            transform: translateX(4px);
+        }
+
+        .legal-content-container {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 28px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            min-height: 450px;
+        }
+
+        .legal-pane {
+            display: none;
+        }
+
+        .legal-pane.active {
+            display: block;
+            animation: fadeIn 0.4s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .legal-pane h2 {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+
+        .legal-pane .date {
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-bottom: 30px;
+        }
+
+        .legal-pane h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            margin: 24px 0 10px 0;
+        }
+
+        .legal-pane p {
+            color: var(--text-muted);
+            font-size: 14.5px;
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        /* --- Footer --- */
+        footer {
+            padding: 80px 8% 40px;
+            background: #020202;
+            border-top: 1px solid var(--border);
+            position: relative;
+            z-index: 10;
+        }
+
+        .footer-grid {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-top: 12px;
+            max-width: 300px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 80px;
+        }
+
+        .link-group h5 {
+            color: #fff;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .link-group ul {
+            list-style: none;
+        }
+
+        .link-group ul li {
+            margin-bottom: 12px;
+        }
+
+        .link-group ul li a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .link-group ul li a:hover {
+            color: #fff;
+        }
+
+        .footer-bottom {
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        /* --- Responsive Styles --- */
         @media (max-width: 992px) {
-            .hero { flex-direction: column; text-align: center; height: auto; }
-            .hero-image { justify-content: center; margin-top: 50px; }
+            header { padding: 20px 5%; }
+            .hero { flex-direction: column; text-align: center; padding-top: 120px; gap: 50px; }
+            .hero-content p { margin-left: auto; margin-right: auto; }
+            .hero-actions { justify-content: center; }
+            .legal-grid { grid-template-columns: 1fr; gap: 40px; }
+            .legal-menu { position: relative; top: 0; }
+        }
+
+        @media (max-width: 768px) {
             nav { display: none; }
+            .footer-grid { flex-direction: column; gap: 30px; }
+            .footer-links { gap: 40px; flex-wrap: wrap; }
+            .footer-bottom { flex-direction: column; gap: 15px; text-align: center; }
         }
     </style>
 </head>
 <body>
 
+    <!-- Ambient Glow Backdrops -->
+    <div class="ambient-bg"></div>
+    <div class="ambient-bg-left"></div>
+
+    <!-- Header Section -->
     <header>
-        <div class="logo">TR-SHORTS</div>
+        <a href="#" class="logo">
+            <span class="logo-text">TR<span>SHORTS</span></span>
+        </a>
         <nav>
             <a href="#about">Hakkımızda</a>
             <a href="#features">Özellikler</a>
-            <a href="#privacy">Gizlilik Politikası</a>
-            <a href="#delete-account">Hesap Sil</a>
-            <a href="#contact">Destek</a>
+            <a href="#vip">VIP Paketler</a>
+            <a href="#legal" onclick="switchTab('privacy')">Gizlilik Politikası</a>
+            <a href="#legal" onclick="switchTab('delete-account')">Hesap Silme</a>
+            <a href="#contact" class="btn-nav">Şimdi İndir</a>
         </nav>
     </header>
 
+    <!-- Hero Section -->
     <section class="hero" id="about">
         <div class="hero-content">
-            <h1>Kısa Dramaların <span>Premium</span> Dünyası</h1>
-            <p>Dakikalar içinde dev hikayeler. TR-Shorts ile en sevdiğin diziler her an cebinde, reklamsız ve kesintisiz.</p>
-            <a href="#" class="btn">Google Play'den İndir</a>
+            <div class="hero-badge">
+                <span>🔥</span> Kısa Dramaların Yeni Dönemi Başladı
+            </div>
+            <h1>
+                <span class="gradient">Dakikalar İçinde</span><br>
+                <span class="red">Büyük Hikayeler</span>
+            </h1>
+            <p>
+                TR-Shorts ile en kaliteli ve sürükleyici dikey kısa dramalar her an yanınızda. Bekleme yok, reklam yok; sadece kesintisiz premium eğlence var.
+            </p>
+            <div class="hero-actions">
+                <a href="#" class="btn-primary">
+                    <span>🎬</span> Google Play'den İndir
+                </a>
+                
+                <!-- Hesap Silme Kısa Yol -->
+                <a href="#legal" class="btn-secondary" onclick="switchTab('delete-account')">
+                    🗑️ Hesap Silme Talebi
+                </a>
+            </div>
         </div>
+        
         <div class="hero-image">
-            <!-- GÖRSEL YENİLENDİ -->
-            <img src="trshorts_landing_hero_1778611213736.png" alt="TR-Shorts Mockup">
+            <div class="phone-mockup-wrapper">
+                <img src="trshorts_landing_hero_1778611213736.png" alt="TR-Shorts Uygulama Görünümü">
+            </div>
         </div>
     </section>
 
+    <!-- Features Section -->
     <section class="features" id="features">
-        <div class="feat-card">
-            <h3>Hızlı İzle</h3>
-            <p>1-2 dakikalık bölümlerle vaktini en iyi şekilde değerlendir. Metroda, otobüste veya molada keyfine bak.</p>
+        <div class="section-header">
+            <h2>Neden <span>TR-Shorts</span>?</h2>
+            <p>Mobil öncelikli olarak tasarlanmış en benzersiz drama deneyimi ile tanışın.</p>
         </div>
-        <div class="feat-card">
-            <h3>4K Kalite</h3>
-            <p>Tüm içeriklerimiz en yüksek çözünürlükte, profesyonel ekipler tarafından hazırlanmıştır.</p>
-        </div>
-        <div class="feat-card">
-            <h3>VIP Ayrıcalığı</h3>
-            <p>Sınırsız erişim ve özel içeriklerle deneyimini bir üst seviyeye taşı.</p>
-        </div>
-    </section>
-
-    <section id="privacy" style="padding: 0 10%;">
-        <div class="policy-box">
-            <h2>Gizlilik Politikası</h2>
-            <p>Son Güncelleme: 12 Mayıs 2026</p>
-            <p>TR-Shorts olarak gizliliğinize önem veriyoruz. Bu politika, uygulamamızı kullandığınızda verilerinizin nasıl işlendiğini açıklar.</p>
-            <p><strong>1. Toplanan Veriler:</strong> Uygulamamız profil oluşturmanız için e-posta adresinizi ve izleme geçmişinizi toplar. Bu veriler size daha iyi öneriler sunmak amacıyla kullanılır.</p>
-            <p><strong>2. Veri Güvenliği:</strong> Verileriniz Supabase altyapısı üzerinde yüksek güvenlikli sunucularda saklanmaktadır.</p>
-            <p><strong>3. Üçüncü Taraflar:</strong> Google Play Hizmetleri ve Firebase, uygulama performansını ölçmek ve bildirim göndermek için anonim veriler toplayabilir.</p>
-            <p><strong>4. İletişim:</strong> Gizlilik politikamız hakkında sorularınız için support@arananfilms.com adresinden bize ulaşabilirsiniz.</p>
+        <div class="features-grid">
+            <div class="feat-card">
+                <div class="feat-icon">⚡</div>
+                <h3>Dikey Format</h3>
+                <p>Telefonunuzu çevirmenize gerek kalmadan, tek elle en rahat izleme deneyimini sunmak için özel tasarlanmış dikey dramalar.</p>
+            </div>
+            <div class="feat-card">
+                <div class="feat-icon">💎</div>
+                <h3>Üstün Yapım Kalitesi</h3>
+                <p>Her sahnesi profesyonel kameralar ve oyuncu kadroları ile hazırlanmış sinematik seviyedeki diziler.</p>
+            </div>
+            <div class="feat-card">
+                <div class="feat-icon">🍿</div>
+                <h3>Hızlı Bölümler</h3>
+                <p>1-2 dakikalık tempolu bölümler sayesinde molada, yolculukta veya dilediğiniz her boş anda kolayca takip edin.</p>
+            </div>
         </div>
     </section>
 
-    <!-- ====== HESAP SİLME BÖLÜMÜ ====== -->
-    <section id="delete-account" style="padding: 60px 10%; background: #0a0a0a;">
-        <div style="max-width: 800px; margin: 0 auto;">
-            <div style="background: #111; border: 1px solid #333; border-radius: 30px; padding: 50px;">
-                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 30px;">
-                    <div style="width: 50px; height: 50px; background: linear-gradient(45deg, #E50914, #a00010); border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 22px;">🗑️</div>
-                    <div>
-                        <h2 style="color: #FFD700; font-size: 26px; margin: 0;">Hesap ve Veri Silme Talebi</h2>
-                        <p style="color: #666; font-size: 13px; margin: 4px 0 0;">TR-Shorts — ArananFilms Production</p>
-                    </div>
+    <!-- VIP Pricing Section -->
+    <section class="vip-section" id="vip">
+        <div class="section-header">
+            <h2>Limitleri Kaldırın, <span>VIP</span> Olun</h2>
+            <p>VIP paketlerimizle jeton beklemeden tüm bölümlere anında ve sınırsız erişin.</p>
+        </div>
+        <div class="pricing-grid">
+            <!-- Weekly -->
+            <div class="price-card">
+                <div class="price-name">Haftalık VIP</div>
+                <div class="price-val">₺150,00</div>
+                <div class="price-period">haftalık faturalandırılır</div>
+                <ul class="price-features">
+                    <li>Tüm dizilere sınırsız erişim</li>
+                    <li>Sıfır reklam deneyimi</li>
+                    <li>Erken erişim bölümleri</li>
+                    <li>4K Ultra HD video kalitesi</li>
+                </ul>
+                <a href="#" class="btn-price">Paketi Seç</a>
+            </div>
+
+            <!-- Monthly (Popular) -->
+            <div class="price-card popular">
+                <div class="popular-badge">EN POPÜLER</div>
+                <div class="price-name">Aylık VIP</div>
+                <div class="price-val">₺350,00</div>
+                <div class="price-period">aylık faturalandırılır</div>
+                <ul class="price-features">
+                    <li>Tüm dizilere sınırsız erişim</li>
+                    <li>Sıfır reklam deneyimi</li>
+                    <li>Erken erişim bölümleri</li>
+                    <li>4K Ultra HD video kalitesi</li>
+                    <li>Destek önceliği</li>
+                </ul>
+                <a href="#" class="btn-price">Aboneliği Başlat</a>
+            </div>
+
+            <!-- Yearly -->
+            <div class="price-card">
+                <div class="price-name">Yıllık VIP</div>
+                <div class="price-val">₺1.500,00</div>
+                <div class="price-period">yıllık faturalandırılır</div>
+                <ul class="price-features">
+                    <li>Tüm dizilere sınırsız erişim</li>
+                    <li>Sıfır reklam deneyimi</li>
+                    <li>Erken erişim bölümleri</li>
+                    <li>4K Ultra HD video kalitesi</li>
+                    <li>En iyi fiyat / performans</li>
+                </ul>
+                <a href="#" class="btn-price">Paketi Seç</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Legal & Help Tabs Section -->
+    <section class="legal-section" id="legal">
+        <div class="legal-grid">
+            <div class="legal-menu">
+                <h3>Politikalar & Destek</h3>
+                <div class="legal-nav">
+                    <button class="legal-tab-btn active" id="tab-btn-privacy" onclick="switchTab('privacy')">
+                        Gizlilik Politikası <span class="arrow">→</span>
+                    </button>
+                    <button class="legal-tab-btn" id="tab-btn-terms" onclick="switchTab('terms')">
+                        Kullanım Koşulları <span class="arrow">→</span>
+                    </button>
+                    <button class="legal-tab-btn" id="tab-btn-delete-account" onclick="switchTab('delete-account')">
+                        🗑️ Hesap Silme Talebi <span class="arrow">→</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="legal-content-container">
+                <!-- Privacy Content -->
+                <div class="legal-pane active" id="pane-privacy">
+                    <h2>Gizlilik Politikası</h2>
+                    <div class="date">Son Güncelleme: 12 Mayıs 2026</div>
+                    <p>TR-Shorts ("biz", "uygulamamız") olarak gizlilik haklarınıza son derece önem veriyoruz. Bu gizlilik politikası, uygulamamızı kullandığınız süre boyunca hangi verilerin ne amaçla toplandığını açıklar.</p>
+                    
+                    <h4>1. Toplanan Veri Türleri</h4>
+                    <p><strong>Kişisel Bilgiler:</strong> Uygulamamızda profil oluşturup VIP üyelik özellikleri kullanabilmeniz için Google ile Giriş yaptığınızda E-posta Adresiniz ve Kullanıcı Kimliğiniz güvenli bir şekilde alınır.</p>
+                    <p><strong>Uygulama Bilgileri ve Performans:</strong> Uygulama kilitlenme günlükleri, teşhis verileri ve performans istatistikleri, uygulamamızı optimize etmek adına üçüncü taraf sistemler (Google Firebase, Sentry vb.) aracılığıyla anonim olarak izlenir.</p>
+                    <p><strong>Uygulama Etkinliği:</strong> İzleme geçmişiniz ve satın alma tercihleriniz, size kişiselleştirilmiş içerik sunmak ve VIP haklarınızı doğrulamak amacıyla kaydedilir.</p>
+
+                    <h4>2. Verilerin İşlenmesi ve Güvenlik</h4>
+                    <p>Tüm kullanıcı verileri, endüstri standardı şifreleme protokolleri (SSL/TLS) kullanılarak internet üzerinden güvenli bir şekilde aktarılır ve yüksek korumalı Supabase bulut sunucularında saklanır.</p>
+
+                    <h4>3. Üçüncü Taraflar</h4>
+                    <p>AdMob servis sağlayıcıları uygulama içinde ödüllü video reklamlarının yüklenebilmesi amacıyla bazı cihaz kimliklerini ve reklam etkileşimlerini toplayabilir.</p>
                 </div>
 
-                <p style="color: #aaa; margin-bottom: 25px; line-height: 1.7;">
-                    TR-Shorts hesabınızı ve hesabınıza bağlı tüm kişisel verileri kalıcı olarak silmek için aşağıdaki adımları izleyebilirsiniz.
-                </p>
+                <!-- Terms Content -->
+                <div class="legal-pane" id="pane-terms">
+                    <h2>Kullanım Koşulları</h2>
+                    <div class="date">Son Güncelleme: 12 Mayıs 2026</div>
+                    <p>TR-Shorts uygulamasını cihazınıza yükleyerek ve kullanarak aşağıdaki şartları kabul etmiş sayılırsınız.</p>
+                    
+                    <h4>1. VIP Abonelik Hizmetleri</h4>
+                    <p>Uygulamamız içerisindeki tüm abonelikler Google Play Billing kütüphanesi entegrasyonu ile Google Play Store üzerinden gerçekleştirilir. Aboneliğinizi başlattığınızda tahsilat Google hesabınızdan yapılır.</p>
+                    
+                    <h4>2. Otomatik Yenileme</h4>
+                    <p>Abonelikler, aktif dönemin bitiminden en az 24 saat önce iptal edilmediği takdirde aynı paketin güncel bedeli üzerinden otomatik olarak yenilenir. Yenileme işlemleri dönem sonuna 24 saat kala hesabınıza yansıtılır.</p>
 
-                <div style="background: #1a1a1a; border-radius: 20px; padding: 30px; margin-bottom: 25px;">
-                    <h3 style="color: #FFD700; margin-bottom: 20px; font-size: 18px;">📱 Uygulama Üzerinden Silme (Önerilen)</h3>
-                    <ol style="color: #aaa; padding-left: 20px; line-height: 2.2; font-size: 15px;">
-                        <li>TR-Shorts uygulamasını açın</li>
-                        <li>Alt menüden <strong style="color: white;">Profil</strong> sekmesine gidin</li>
-                        <li>Sayfayı aşağı kaydırarak <strong style="color: white;">&ldquo;Hesabımı Kalıcı Olarak Sil&rdquo;</strong> butonuna tıklayın</li>
-                        <li>Onay ekranında silme işlemini onaylayın</li>
-                        <li>Hesabınız ve tüm verileriniz <strong style="color: #E50914;">aninda ve kalıcı</strong> olarak silinir</li>
-                    </ol>
+                    <h4>3. Fikri Mülkiyet</h4>
+                    <p>Uygulama içerisinde yer alan tüm dikey drama videoları, ses dosyaları, görseller ve diğer materyaller ArananFilms Production'a aittir. İzinsiz kopyalanması, dağıtılması veya farklı platformlarda yayınlanması yasaktır.</p>
                 </div>
 
-                <div style="background: #1a1a1a; border-radius: 20px; padding: 30px; margin-bottom: 25px;">
-                    <h3 style="color: #FFD700; margin-bottom: 20px; font-size: 18px;">✉️ E-Posta ile Silme Talebi</h3>
-                    <p style="color: #aaa; line-height: 1.8; margin-bottom: 15px;">Uygulamaya erişiminiz yoksa aşağıdaki adrese e-posta gönderin:</p>
-                    <a href="mailto:support@arananfilms.com" style="display: inline-block; background: linear-gradient(45deg, #FFD700, #DAA520); color: #000; font-weight: 900; padding: 12px 30px; border-radius: 25px; text-decoration: none; font-size: 15px;">support@arananfilms.com</a>
-                    <p style="color: #666; font-size: 13px; margin-top: 15px;">E-posta konusu: <strong style="color: #aaa;">&ldquo;Hesap Silme Talebi&rdquo;</strong> &mdash; hesabınıza kayıtlı e-posta adresini belirtmeyi unutmayın. Talepler <strong style="color: white;">7 iş günü</strong> içinde işleme alınır.</p>
-                </div>
+                <!-- Account Deletion Content -->
+                <div class="legal-pane" id="pane-delete-account">
+                    <h2>Hesap ve Veri Silme</h2>
+                    <div class="date">TR-Shorts Kalıcı Veri Temizleme Yönergesi</div>
+                    <p>Kullanıcılarımızın kendi verileri üzerinde tam kontrole sahip olması gerektiğine inanıyoruz. İstediğiniz an hesabınızı ve bağlı verileri kalıcı olarak silebilirsiniz.</p>
 
-                <div style="background: #1a0000; border: 1px solid #330000; border-radius: 20px; padding: 30px; margin-bottom: 25px;">
-                    <h3 style="color: #E50914; margin-bottom: 15px; font-size: 18px;">🗂️ Silinen Veriler</h3>
-                    <ul style="color: #aaa; padding-left: 20px; line-height: 2; font-size: 14px;">
-                        <li>Hesap bilgileri (e-posta adresi, kullanıcı adı)</li>
-                        <li>İzleme geçmişi ve favori listesi</li>
-                        <li>Jeton bakiyesi ve ödül geçmişi</li>
-                        <li>VIP üyelik bilgileri</li>
-                        <li>Push bildirim tokeni</li>
-                        <li>Tüm kişisel profil verileri</li>
-                    </ul>
-                </div>
-
-                <div style="background: #0f1a0f; border: 1px solid #1a3a1a; border-radius: 20px; padding: 25px;">
-                    <h3 style="color: #4CAF50; margin-bottom: 10px; font-size: 16px;">📋 Veri Saklama Süresi</h3>
-                    <p style="color: #aaa; font-size: 14px; line-height: 1.8;">
-                        Hesabınız silindikten sonra kişisel verileriniz <strong style="color: white;">derhal sistemden kaldırılır</strong>.
-                        Google Play üzerinden yapılan abonelik işlem kayıtları, yasal zorunluluklar gereği <strong style="color: white;">90 güne kadar</strong> Google&rsquo;un kendi sistemlerinde saklanabilir.
-                        Abonelik iptali için Google Play hesap ayarlarınızı kullanabilirsiniz.
+                    <h4>📱 Yöntem 1: Uygulama İçinden Silme (Önerilen)</h4>
+                    <p>Uygulamamızın içine entegre edilmiş sistemi kullanarak işleminizi saniyeler içinde tamamlayabilirsiniz:</p>
+                    <p style="color: #fff; background: rgba(255,255,255,0.03); padding: 15px; border-radius: 12px; border-left: 3px solid var(--primary); font-size: 14px;">
+                        <strong>Profil</strong> sekmesine gidin → Sayfayı aşağı kaydırın → <strong>"Hesabımı Kalıcı Olarak Sil"</strong> butonuna basın → İşlemi onaylayın.
                     </p>
+
+                    <h4>✉️ Yöntem 2: E-Posta ile Talep Gönderme</h4>
+                    <p>Uygulamaya erişemiyorsanız, kayıt olduğunuz e-posta adresinden <a href="mailto:support@arananfilms.com" style="color: var(--primary); text-decoration: none; font-weight: 700;">support@arananfilms.com</a> adresine konu kısmına "Hesap Silme Talebi" yazarak e-posta gönderebilirsiniz. Talebiniz 7 iş günü içerisinde tamamlanacaktır.</p>
+
+                    <h4>📂 Silinen Veri Kapsamı</h4>
+                    <p>Talep sonucunda Google Auth bilgileri, izleme geçmişiniz, satın aldığınız VIP abonelik yetkileri, jeton verileriniz sunucumuzdan tamamen temizlenir. Yasal fatura kayıtları hariç hiçbir veriniz saklanmaz.</p>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Footer Section -->
     <footer id="contact">
-        <div class="logo" style="margin-bottom: 20px;">TR-SHORTS</div>
-        <p>ArananFilms Production © 2026</p>
-        <div class="contact-info">
-            <p>Destek: support@arananfilms.com</p>
-            <p>Adres: İstanbul, Türkiye</p>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="#" class="logo">
+                    <span class="logo-text">TR<span>SHORTS</span></span>
+                </a>
+                <p>TR-Shorts, ArananFilms Production tarafından geliştirilen birinci sınıf kısa dikey drama platformudur.</p>
+            </div>
+            <div class="footer-links">
+                <div class="link-group">
+                    <h5>Gezinti</h5>
+                    <ul>
+                        <li><a href="#about">Hakkımızda</a></li>
+                        <li><a href="#features">Özellikler</a></li>
+                        <li><a href="#vip">VIP Paketler</a></li>
+                    </ul>
+                </div>
+                <div class="link-group">
+                    <h5>Yasal</h5>
+                    <ul>
+                        <li><a href="#legal" onclick="switchTab('privacy')">Gizlilik Politikası</a></li>
+                        <li><a href="#legal" onclick="switchTab('terms')">Kullanım Koşulları</a></li>
+                        <li><a href="#legal" onclick="switchTab('delete-account')">Hesap Silme</a></li>
+                    </ul>
+                </div>
+                <div class="link-group">
+                    <h5>İletişim</h5>
+                    <ul>
+                        <li><a href="mailto:support@arananfilms.com">support@arananfilms.com</a></li>
+                        <li>Adres: İstanbul, Türkiye</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 ArananFilms Production. Tüm Hakları Saklıdır.</p>
+            <p>Design and Code by Antigravity AI</p>
         </div>
     </footer>
 
+    <!-- Tab Switching Script -->
+    <script>
+        function switchTab(tabId) {
+            // Remove active classes
+            document.querySelectorAll('.legal-tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.legal-pane').forEach(pane => pane.classList.remove('active'));
+
+            // Add active classes to targeted tab
+            const targetBtn = document.getElementById('tab-btn-' + tabId);
+            const targetPane = document.getElementById('pane-' + tabId);
+            
+            if (targetBtn && targetPane) {
+                targetBtn.classList.add('active');
+                targetPane.classList.add('active');
+            }
+        }
+    </script>
 </body>
 </html>
