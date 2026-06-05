@@ -821,7 +821,7 @@
             <a href="#vip">VIP Üyelik</a>
             <a href="#legal" onclick="switchTab('privacy')">Gizlilik</a>
             <a href="#legal" onclick="switchTab('delete-account')">Hesap Silme</a>
-            <a href="#" class="btn-download-nav">İndir</a>
+            <a href="https://play.google.com/store/apps/details?id=com.trshorts.app" class="btn-download-nav" target="_blank" rel="noopener noreferrer">İndir</a>
         </nav>
     </header>
 
@@ -839,7 +839,7 @@
                 Sinematik dikey dizilerle beklemeden, kesintisiz ve tek elle harika yapımlar izleyin. TR-Shorts ile dramanın en yeni hali her an cebinizde.
             </p>
             <div class="hero-actions">
-                <a href="#" class="btn-download-playstore">
+                <a href="https://play.google.com/store/apps/details?id=com.trshorts.app" class="btn-download-playstore" target="_blank" rel="noopener noreferrer">
                     <span>📱</span> Google Play'den İndir
                 </a>
                 <a href="#legal" class="btn-scroll-details" onclick="switchTab('delete-account')">
@@ -945,7 +945,7 @@
                     <li>Yeni bölümlere erken erişim</li>
                     <li>FHD video oynatma kalitesi</li>
                 </ul>
-                <a href="#" class="btn-vip-action">Paketi Seç</a>
+                <a href="https://play.google.com/store/apps/details?id=com.trshorts.app" class="btn-vip-action" target="_blank" rel="noopener noreferrer">Paketi Seç</a>
             </div>
 
             <!-- Aylık Premium -->
@@ -961,7 +961,7 @@
                     <li>FHD video oynatma kalitesi</li>
                     <li>Destek önceliği</li>
                 </ul>
-                <a href="#" class="btn-vip-action">Aboneliği Başlat</a>
+                <a href="https://play.google.com/store/apps/details?id=com.trshorts.app" class="btn-vip-action" target="_blank" rel="noopener noreferrer">Aboneliği Başlat</a>
             </div>
 
             <!-- Yıllık -->
@@ -976,7 +976,7 @@
                     <li>FHD video oynatma kalitesi</li>
                     <li>En ekonomik paket</li>
                 </ul>
-                <a href="#" class="btn-vip-action">Paketi Seç</a>
+                <a href="https://play.google.com/store/apps/details?id=com.trshorts.app" class="btn-vip-action" target="_blank" rel="noopener noreferrer">Paketi Seç</a>
             </div>
         </div>
     </section>
@@ -1047,7 +1047,7 @@
                     </p>
 
                     <h4>✉️ 2. Yöntem: E-Posta ile Talep Gönderme</h4>
-                    <p>Uygulamayı sildiyseniz veya erişemiyorsanız, kayıtlı e-posta adresiniz üzerinden <a href="mailto:support@arananfilms.com" style="color: var(--primary); text-decoration: none; font-weight: 700;">support@arananfilms.com</a> adresine başlığı "Hesap Silme Talebi" olan bir e-posta göndererek hesabınızın silinmesini talep edebilirsiniz. Talebiniz 7 iş günü içerisinde yerine getirilir.</p>
+                    <p>Uygulamayı sildiyseniz veya erişemiyorsanız, kayıtlı e-posta adresiniz üzerinden <a href="mailto:trshortsdrama@gmail.com" style="color: var(--primary); text-decoration: none; font-weight: 700;">trshortsdrama@gmail.com</a> adresine başlığı "Hesap Silme Talebi" olan bir e-posta göndererek hesabınızın silinmesini talep edebilirsiniz. Talebiniz 7 iş günü içerisinde yerine getirilir.</p>
 
                     <h4>📂 Silinen Veriler Hangileridir?</h4>
                     <p>Hesap profiliniz, Google Auth kimlik bağlantısı, izleme geçmişiniz, VIP üyelik haklarınız ve jeton bilgileriniz veritabanımızdan geri döndürülemeyecek şekilde tamamen silinir. Mali yasal defterler haricinde hiçbir veriniz saklanmaz.</p>
@@ -1085,7 +1085,7 @@
                 <div class="nav-group">
                     <h6>İletişim</h6>
                     <ul>
-                        <li><a href="mailto:support@arananfilms.com">support@arananfilms.com</a></li>
+                        <li><a href="mailto:trshortsdrama@gmail.com">trshortsdrama@gmail.com</a></li>
                         <li>Konum: İstanbul, Türkiye</li>
                     </ul>
                 </div>
@@ -1118,8 +1118,28 @@
             if (targetBtn && targetPane) {
                 targetBtn.classList.add('active');
                 targetPane.classList.add('active');
+                
+                // URL'yi değiştir ama sayfayı zıplatma
+                if(history.pushState) {
+                    history.pushState(null, null, '#' + tabId);
+                }
             }
         }
+
+        // Sayfa yüklendiğinde URL'de #delete-account gibi bir ek varsa o sekmeyi aç
+        window.addEventListener('DOMContentLoaded', () => {
+            const hash = window.location.hash.substring(1); // '#' işaretini kaldır
+            if (hash === 'delete-account' || hash === 'privacy' || hash === 'terms') {
+                switchTab(hash);
+                // Kısa bir gecikme ile ilgili bölüme kaydır (render olması için)
+                setTimeout(() => {
+                    const legalSection = document.getElementById('legal');
+                    if(legalSection) {
+                        legalSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }, 300);
+            }
+        });
     </script>
 </body>
 </html>
