@@ -3,35 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TR-Shorts | Kısa Dramaların Yeni Dünyası</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <title>TR-Shorts | Kısa Dramaların Premium Dünyası</title>
+    
+    <!-- Premium Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --primary: #FFD700;
-            --secondary: #DAA520;
-            --bg: #050505;
-            --card: #111;
-            --text: #ffffff;
-            --text-dim: #888;
+            --primary: #E50914; /* Cinematic Red */
+            --primary-glow: rgba(229, 9, 20, 0.4);
+            --accent: #FFD700; /* Gold */
+            --bg-dark: #050505;
+            --bg-card: rgba(18, 18, 18, 0.65);
+            --border-light: rgba(255, 255, 255, 0.08);
+            --text-white: #FFFFFF;
+            --text-gray: #A2A2A7;
+            --font-display: 'Outfit', sans-serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
+            font-family: var(--font-body);
+            scroll-behavior: smooth;
         }
 
         body {
-            background-color: var(--bg);
-            color: var(--text);
+            background-color: var(--bg-dark);
+            color: var(--text-white);
             line-height: 1.6;
             overflow-x: hidden;
         }
 
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #252525;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+
+        /* Background Glows */
+        .glow-sphere-1 {
+            position: absolute;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(229, 9, 20, 0.15) 0%, transparent 65%);
+            top: -200px;
+            right: -100px;
+            z-index: 0;
+            pointer-events: none;
+            filter: blur(100px);
+        }
+
+        .glow-sphere-2 {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.04) 0%, transparent 70%);
+            top: 800px;
+            left: -200px;
+            z-index: 0;
+            pointer-events: none;
+            filter: blur(120px);
+        }
+
+        .glow-sphere-3 {
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(229, 9, 20, 0.07) 0%, transparent 70%);
+            bottom: 300px;
+            right: -200px;
+            z-index: 0;
+            pointer-events: none;
+            filter: blur(130px);
+        }
+
         /* --- Header --- */
         header {
-            padding: 20px 5%;
+            padding: 20px 8%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -39,214 +101,1025 @@
             width: 100%;
             top: 0;
             z-index: 1000;
-            background: rgba(5, 5, 5, 0.8);
-            backdrop-filter: blur(10px);
+            background: rgba(5, 5, 5, 0.75);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-bottom: 1px solid var(--border-light);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        header.scrolled {
+            padding: 14px 8%;
+            background: rgba(5, 5, 5, 0.9);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         .logo {
-            font-size: 24px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-text {
+            font-family: var(--font-display);
+            color: var(--text-white);
             font-weight: 900;
-            letter-spacing: -1px;
+            font-size: 26px;
+            letter-spacing: -1.5px;
+            text-transform: uppercase;
+        }
+
+        .logo-text span {
             color: var(--primary);
+            text-shadow: 0 0 15px rgba(229, 9, 20, 0.5);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 36px;
         }
 
         nav a {
-            color: var(--text);
+            color: var(--text-gray);
             text-decoration: none;
-            margin-left: 30px;
-            font-size: 14px;
+            font-size: 14.5px;
             font-weight: 600;
-            transition: 0.3s;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
         }
 
         nav a:hover {
-            color: var(--primary);
+            color: var(--text-white);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .btn-download-nav {
+            background: linear-gradient(135deg, #E50914 0%, #b0060e 100%);
+            color: #fff !important;
+            padding: 10px 24px;
+            border-radius: 14px;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(229, 9, 20, 0.3);
+        }
+
+        .btn-download-nav::after {
+            display: none;
+        }
+
+        .btn-download-nav:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 22px rgba(229, 9, 20, 0.55);
         }
 
         /* --- Hero Section --- */
         .hero {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
-            padding: 0 10%;
-            background: radial-gradient(circle at 70% 50%, rgba(218, 165, 32, 0.1) 0%, transparent 50%);
+            padding: 160px 8% 100px;
+            position: relative;
+            z-index: 10;
+            gap: 5%;
         }
 
         .hero-content {
-            flex: 1;
+            flex: 1.2;
+        }
+
+        .badge-live {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 8px 18px;
+            border-radius: 100px;
+            font-size: 13.5px;
+            font-weight: 700;
+            margin-bottom: 28px;
+            color: var(--accent);
+            letter-spacing: 0.5px;
+        }
+
+        .badge-live span.dot {
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            animation: pulse-red 1.8s infinite;
+        }
+
+        @keyframes pulse-red {
+            0% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(229, 9, 20, 0.7); }
+            70% { transform: scale(1.1); box-shadow: 0 0 0 8px rgba(229, 9, 20, 0); }
+            100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(229, 9, 20, 0); }
         }
 
         .hero-content h1 {
-            font-size: 64px;
-            line-height: 1.1;
-            margin-bottom: 20px;
+            font-family: var(--font-display);
+            font-size: clamp(40px, 5.8vw, 72px);
+            line-height: 1.05;
+            margin-bottom: 28px;
             font-weight: 900;
+            letter-spacing: -2.5px;
         }
 
-        .hero-content h1 span {
+        .hero-content h1 span.highlight-white {
+            color: var(--text-white);
+        }
+
+        .hero-content h1 span.highlight-red {
             color: var(--primary);
+            position: relative;
+            display: inline-block;
         }
 
         .hero-content p {
             font-size: 18px;
-            color: var(--text-dim);
-            margin-bottom: 40px;
-            max-width: 500px;
+            color: var(--text-gray);
+            margin-bottom: 44px;
+            max-width: 550px;
+            line-height: 1.7;
+        }
+
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn-download-playstore {
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            padding: 18px 36px;
+            background: linear-gradient(135deg, #E50914 0%, #a0000a 100%);
+            color: #fff;
+            text-decoration: none;
+            font-weight: 800;
+            border-radius: 18px;
+            font-size: 15px;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 10px 25px rgba(229, 9, 20, 0.4);
+        }
+
+        .btn-download-playstore:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(229, 9, 20, 0.6);
+            background: linear-gradient(135deg, #ff1a25 0%, #b8050e 100%);
+        }
+
+        .btn-scroll-details {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 18px 32px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-light);
+            color: var(--text-white);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 15px;
+            border-radius: 18px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-scroll-details:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
         }
 
         .hero-image {
-            flex: 1;
+            flex: 0.8;
             display: flex;
-            justify-content: flex-end;
+            justify-content: center;
+            align-items: center;
+            position: relative;
         }
 
-        .hero-image img {
+        .phone-display-container {
+            position: relative;
             width: 100%;
-            max-width: 600px;
-            filter: drop-shadow(0 20px 50px rgba(0,0,0,0.5));
+            max-width: 340px;
+            border-radius: 46px;
+            padding: 10px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(0,0,0,0) 100%);
+            box-shadow: 0 35px 80px rgba(0, 0, 0, 0.9);
         }
 
-        .btn {
-            display: inline-block;
-            padding: 15px 40px;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            color: #000;
-            text-decoration: none;
-            font-weight: 900;
-            border-radius: 50px;
-            transition: 0.3s;
-            box-shadow: 0 10px 30px rgba(218, 165, 32, 0.3);
+        .phone-display-container img {
+            width: 100%;
+            border-radius: 38px;
+            display: block;
         }
 
-        .btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(218, 165, 32, 0.5);
+        /* --- Showcase / Drama Slider --- */
+        .showcase {
+            padding: 100px 0;
+            background: #090909;
+            position: relative;
+            z-index: 10;
+            overflow: hidden;
+        }
+
+        .showcase-slider {
+            display: flex;
+            gap: 24px;
+            padding: 20px 8%;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+        }
+
+        .showcase-slider::-webkit-scrollbar {
+            display: none;
+        }
+
+        .showcase-card {
+            flex: 0 0 240px;
+            scroll-snap-align: start;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            aspect-ratio: 9 / 14;
+            background: #111;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .showcase-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .showcase-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.9) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 20px;
+        }
+
+        .showcase-card h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .showcase-card p {
+            font-size: 12px;
+            color: var(--text-gray);
+        }
+
+        .showcase-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(229, 9, 20, 0.4);
+            box-shadow: 0 15px 30px rgba(229, 9, 20, 0.1);
+        }
+
+        .showcase-card:hover img {
+            transform: scale(1.08);
         }
 
         /* --- Features --- */
-        .features {
-            padding: 100px 10%;
+        .features-section {
+            padding: 120px 8%;
+            position: relative;
+            z-index: 10;
+        }
+
+        .grid-features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
         }
 
-        .feat-card {
-            background: var(--card);
-            padding: 40px;
-            border-radius: 30px;
-            border: 1px solid #222;
-            transition: 0.3s;
+        .feature-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: 24px;
+            padding: 45px 35px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .feat-card:hover {
-            border-color: var(--primary);
-            transform: scale(1.05);
+        .feature-item:hover {
+            border-color: rgba(229, 9, 20, 0.3);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 45px rgba(0,0,0,0.4);
         }
 
-        .feat-card h3 {
+        .feature-icon-wrapper {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 54px;
+            height: 54px;
+            border-radius: 16px;
+            background: rgba(229, 9, 20, 0.08);
+            border: 1px solid rgba(229, 9, 20, 0.2);
             font-size: 24px;
-            margin-bottom: 15px;
+            margin-bottom: 24px;
             color: var(--primary);
         }
 
-        .feat-card p {
-            color: var(--text-dim);
+        .feature-item h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #fff;
         }
 
-        /* --- Footer / Policy --- */
-        footer {
-            padding: 100px 10% 50px;
-            background: #000;
-            text-align: center;
+        .feature-item p {
+            color: var(--text-gray);
+            font-size: 14.5px;
+            line-height: 1.65;
         }
 
-        .policy-box {
-            background: #111;
-            padding: 50px;
+        /* --- VIP packages --- */
+        .pricing-section {
+            padding: 120px 8%;
+            background: #090909;
+            position: relative;
+            z-index: 10;
+        }
+
+        .vip-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .vip-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
             border-radius: 30px;
+            padding: 50px 35px;
+            text-align: center;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+
+        .vip-card.premium {
+            border-color: var(--accent);
+            background: linear-gradient(180deg, rgba(255, 215, 0, 0.05) 0%, rgba(18, 18, 18, 0.75) 100%);
+            transform: scale(1.02);
+        }
+
+        .badge-premium {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: #000;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 6px 18px;
+            border-radius: 100px;
+            letter-spacing: 1px;
+        }
+
+        .vip-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .vip-card.premium:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.1);
+        }
+
+        .vip-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-gray);
+            margin-bottom: 24px;
+        }
+
+        .vip-card.premium .vip-name {
+            color: var(--accent);
+        }
+
+        .vip-price {
+            font-family: var(--font-display);
+            font-size: 46px;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .vip-duration {
+            font-size: 14px;
+            color: var(--text-gray);
+            margin-bottom: 35px;
+        }
+
+        .vip-features-list {
+            list-style: none;
             text-align: left;
-            margin-bottom: 50px;
-            max-height: 400px;
-            overflow-y: auto;
-            border: 1px solid #222;
+            margin-bottom: 40px;
         }
 
-        .policy-box h2 { margin-bottom: 20px; color: var(--primary); }
-        .policy-box p { margin-bottom: 15px; color: var(--text-dim); font-size: 14px; }
-
-        .contact-info {
-            margin-top: 40px;
-            color: var(--text-dim);
+        .vip-features-list li {
+            margin-bottom: 14px;
+            font-size: 14.5px;
+            color: #d1d1d6;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
-        /* Mobile Adjustments */
+        .vip-features-list li::before {
+            content: '✓';
+            color: var(--primary);
+            font-weight: 900;
+        }
+
+        .vip-card.premium .vip-features-list li::before {
+            color: var(--accent);
+        }
+
+        .btn-vip-action {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-vip-action:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        .vip-card.premium .btn-vip-action {
+            background: var(--accent);
+            color: #000;
+            border: none;
+        }
+
+        .vip-card.premium .btn-vip-action:hover {
+            background: #fff;
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+        }
+
+        /* --- Policies & Privacy Section --- */
+        .legal-wrapper {
+            padding: 120px 8%;
+            position: relative;
+            z-index: 10;
+        }
+
+        .legal-container {
+            display: grid;
+            grid-template-columns: 1fr 1.3fr;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .legal-tabs {
+            position: sticky;
+            top: 110px;
+            height: fit-content;
+        }
+
+        .legal-tabs h2 {
+            font-family: var(--font-display);
+            font-size: 36px;
+            font-weight: 900;
+            margin-bottom: 30px;
+            letter-spacing: -1px;
+        }
+
+        .tabs-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .tab-trigger {
+            background: transparent;
+            border: 1px solid var(--border-light);
+            color: var(--text-gray);
+            padding: 18px 24px;
+            border-radius: 16px;
+            font-size: 15px;
+            font-weight: 700;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .tab-trigger:hover {
+            background: rgba(255, 255, 255, 0.02);
+            color: #fff;
+        }
+
+        .tab-trigger.active {
+            background: rgba(229, 9, 20, 0.06);
+            border-color: rgba(229, 9, 20, 0.35);
+            color: #fff;
+        }
+
+        .tab-trigger span.arrow-indicator {
+            opacity: 0;
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .tab-trigger.active span.arrow-indicator {
+            opacity: 1;
+            transform: translateX(4px);
+        }
+
+        .legal-display {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: 28px;
+            padding: 45px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .legal-panel {
+            display: none;
+        }
+
+        .legal-panel.active {
+            display: block;
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+
+        .legal-panel h3 {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 6px;
+            color: #fff;
+        }
+
+        .legal-panel .last-update {
+            color: var(--text-gray);
+            font-size: 13px;
+            margin-bottom: 28px;
+        }
+
+        .legal-panel h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            margin: 24px 0 10px 0;
+        }
+
+        .legal-panel p {
+            color: var(--text-gray);
+            font-size: 14.5px;
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        /* --- Footer --- */
+        footer {
+            padding: 80px 8% 40px;
+            background: #020202;
+            border-top: 1px solid var(--border-light);
+            position: relative;
+            z-index: 10;
+        }
+
+        .footer-cols {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+
+        .footer-info p {
+            color: var(--text-gray);
+            font-size: 14px;
+            margin-top: 16px;
+            max-width: 320px;
+        }
+
+        .footer-nav-groups {
+            display: flex;
+            gap: 80px;
+        }
+
+        .nav-group h6 {
+            color: #fff;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 22px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .nav-group ul {
+            list-style: none;
+        }
+
+        .nav-group ul li {
+            margin-bottom: 12px;
+        }
+
+        .nav-group ul li a {
+            color: var(--text-gray);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-group ul li a:hover {
+            color: #fff;
+        }
+
+        .footer-bottom-row {
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-gray);
+            font-size: 13.5px;
+        }
+
+        /* --- Responsive Queries --- */
+        @media (max-width: 992px) {
+            header { padding: 18px 5%; }
+            .hero { flex-direction: column; text-align: center; padding-top: 130px; gap: 60px; }
+            .hero-content p { margin-left: auto; margin-right: auto; }
+            .hero-actions { justify-content: center; }
+            .legal-container { grid-template-columns: 1fr; gap: 40px; }
+            .legal-tabs { position: relative; top: 0; }
+        }
+
         @media (max-width: 768px) {
-            .hero { flex-direction: column; text-align: center; padding-top: 150px; height: auto; }
-            .hero-content h1 { font-size: 40px; }
-            .hero-image { justify-content: center; margin-top: 50px; }
             nav { display: none; }
+            .footer-cols { flex-direction: column; gap: 30px; }
+            .footer-nav-groups { gap: 40px; flex-wrap: wrap; }
+            .footer-bottom-row { flex-direction: column; gap: 15px; text-align: center; }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo">TR-SHORTS</div>
+    <!-- Ambient Sphere Glow Elements -->
+    <div class="glow-sphere-1"></div>
+    <div class="glow-sphere-2"></div>
+    <div class="glow-sphere-3"></div>
+
+    <!-- Navigation Header -->
+    <header id="main-header">
+        <a href="#" class="logo">
+            <span class="logo-text">TR<span>SHORTS</span></span>
+        </a>
         <nav>
             <a href="#about">Hakkımızda</a>
+            <a href="#diziler">Popüler Diziler</a>
             <a href="#features">Özellikler</a>
-            <a href="#privacy">Gizlilik Politikası</a>
-            <a href="#contact">Destek</a>
+            <a href="#vip">VIP Üyelik</a>
+            <a href="#legal" onclick="switchTab('privacy')">Gizlilik</a>
+            <a href="#legal" onclick="switchTab('delete-account')">Hesap Silme</a>
+            <a href="#" class="btn-download-nav">İndir</a>
         </nav>
     </header>
 
-    <section class="hero">
+    <!-- Main Hero Landing Section -->
+    <section class="hero" id="about">
         <div class="hero-content">
-            <h1>Kısa Dramaların <span>Premium</span> Dünyası</h1>
-            <p>Dakikalar içinde dev hikayeler. TR-Shorts ile en sevdiğin diziler her an cebinde, reklamsız ve kesintisiz.</p>
-            <a href="#" class="btn">Google Play'den İndir</a>
+            <div class="badge-live">
+                <span class="dot"></span> Kısa Dramaların Yeni Premium Dünyası
+            </div>
+            <h1>
+                <span class="highlight-white">Dikey Dramada</span><br>
+                <span class="highlight-red">En Yüksek Kalite</span>
+            </h1>
+            <p>
+                Sinematik dikey dizilerle beklemeden, kesintisiz ve tek elle harika yapımlar izleyin. TR-Shorts ile dramanın en yeni hali her an cebinizde.
+            </p>
+            <div class="hero-actions">
+                <a href="#" class="btn-download-playstore">
+                    <span>📱</span> Google Play'den İndir
+                </a>
+                <a href="#legal" class="btn-scroll-details" onclick="switchTab('delete-account')">
+                    🗑️ Hesap Silme Talebi
+                </a>
+            </div>
         </div>
+        
         <div class="hero-image">
-            <img src="../trshorts_web_mockup_1778580641475.png" alt="TR-Shorts Mockup">
+            <div class="phone-display-container">
+                <img src="trshorts_landing_hero_1778611213736.png" alt="TR-Shorts Telefon Ekranı">
+            </div>
         </div>
     </section>
 
-    <section class="features" id="features">
-        <div class="feat-card">
-            <h3>Hızlı İzle</h3>
-            <p>1-2 dakikalık bölümlerle vaktini en iyi şekilde değerlendir. Metroda, otobüste veya molada keyfine bak.</p>
+    <!-- Series Showcase Slider -->
+    <section class="showcase" id="diziler">
+        <div class="section-header">
+            <h2>Popüler <span>Dizilerimiz</span></h2>
+            <p>Uygulamamız içerisinde en çok izlenen dikey drama ve serilere göz atın.</p>
         </div>
-        <div class="feat-card">
-            <h3>4K Kalite</h3>
-            <p>Tüm içeriklerimiz en yüksek çözünürlükte, profesyonel ekipler tarafından hazırlanmıştır.</p>
-        </div>
-        <div class="feat-card">
-            <h3>VIP Ayrıcalığı</h3>
-            <p>Sınırsız erişim ve özel içeriklerle deneyimini bir üst seviyeye taşı.</p>
+        <div class="showcase-slider">
+            <div class="showcase-card">
+                <!-- Placeholder style with dynamic text-based overlay representing custom posters -->
+                <div style="background: linear-gradient(135deg, #2c1a1a 0%, #111 100%); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                    <span style="font-size: 50px;">🌟</span>
+                </div>
+                <div class="showcase-card-overlay">
+                    <h4>Kpop Star Live!</h4>
+                    <p>Gençlik & Dram</p>
+                </div>
+            </div>
+            <div class="showcase-card">
+                <div style="background: linear-gradient(135deg, #1a232c 0%, #111 100%); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                    <span style="font-size: 50px;">🔥</span>
+                </div>
+                <div class="showcase-card-overlay">
+                    <h4>İntikam Aşkı</h4>
+                    <p>Dram & Romantik</p>
+                </div>
+            </div>
+            <div class="showcase-card">
+                <div style="background: linear-gradient(135deg, #271a2c 0%, #111 100%); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                    <span style="font-size: 50px;">👑</span>
+                </div>
+                <div class="showcase-card-overlay">
+                    <h4>Zengin Mafya</h4>
+                    <p>Aksiyon & Gerilim</p>
+                </div>
+            </div>
+            <div class="showcase-card">
+                <div style="background: linear-gradient(135deg, #1a2c22 0%, #111 100%); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                    <span style="font-size: 50px;">⚡</span>
+                </div>
+                <div class="showcase-card-overlay">
+                    <h4>Son İstasyon</h4>
+                    <p>Bilim Kurgu</p>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section id="privacy" style="padding: 0 10%;">
-        <div class="policy-box">
-            <h2>Gizlilik Politikası</h2>
-            <p>Son Güncelleme: 12 Mayıs 2026</p>
-            <p>TR-Shorts olarak gizliliğinize önem veriyoruz. Bu politika, uygulamamızı kullandığınızda verilerinizin nasıl işlendiğini açıklar.</p>
-            <p><strong>1. Toplanan Veriler:</strong> Uygulamamız profil oluşturmanız için e-posta adresinizi ve izleme geçmişinizi toplar. Bu veriler size daha iyi öneriler sunmak amacıyla kullanılır.</p>
-            <p><strong>2. Veri Güvenliği:</strong> Verileriniz Supabase altyapısı üzerinde yüksek güvenlikli sunucularda saklanmaktadır.</p>
-            <p><strong>3. Üçüncü Taraflar:</strong> Google Play Hizmetleri ve Firebase, uygulama performansını ölçmek ve bildirim göndermek için anonim veriler toplayabilir.</p>
-            <p><strong>4. İletişim:</strong> Gizlilik politikamız hakkında sorularınız için support@arananfilms.com adresinden bize ulaşabilirsiniz.</p>
+    <!-- Core Features Section -->
+    <section class="features-section" id="features">
+        <div class="section-header">
+            <h2>Benzersiz <span>Özellikler</span></h2>
+            <p>Dramayı parmaklarınızın ucuna getirmek için tasarlanmış yenilikler.</p>
+        </div>
+        <div class="grid-features">
+            <div class="feature-item">
+                <div class="feature-icon-wrapper">📱</div>
+                <h3>Dikey Format & Konfor</h3>
+                <p>Tek elle kolayca kaydırarak sonraki bölüme geçin. Dikey format sayesinde her an konforlu izleme.</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon-wrapper">⚡</div>
+                <h3>1-2 Dakikalık Bölümler</h3>
+                <p>Uzatılmış sıkıcı sahneler yok. Sadece en heyecan verici anlardan oluşan hızlı akıcı hikayeler.</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon-wrapper">👑</div>
+                <h3>VIP Sınırsız Erişim</h3>
+                <p>Bölüm kilitlerini beklemeyin. VIP üyelik modelleriyle tüm arşive anında sınırsız erişin.</p>
+            </div>
         </div>
     </section>
 
-    <footer id="contact">
-        <div class="logo" style="margin-bottom: 20px;">TR-SHORTS</div>
-        <p>ArananFilms Production © 2026</p>
-        <div class="contact-info">
-            <p>Destek: support@arananfilms.com</p>
-            <p>Adres: İstanbul, Türkiye</p>
+    <!-- Pricing / VIP Section -->
+    <section class="pricing-section" id="vip">
+        <div class="section-header">
+            <h2>VIP İle <span>Sınırları Kaldırın</span></h2>
+            <p>Jeton beklemeden tüm bölümlere anında ve tamamen reklamsız erişin.</p>
+        </div>
+        <div class="vip-grid">
+            <!-- Haftalık -->
+            <div class="vip-card">
+                <div class="vip-name">Haftalık VIP</div>
+                <div class="vip-price">₺150,00</div>
+                <div class="vip-duration">haftalık otomatik yenilenir</div>
+                <ul class="vip-features-list">
+                    <li>Tüm dizilere sınırsız erişim</li>
+                    <li>Sıfır reklam deneyimi</li>
+                    <li>Yeni bölümlere erken erişim</li>
+                    <li>FHD video oynatma kalitesi</li>
+                </ul>
+                <a href="#" class="btn-vip-action">Paketi Seç</a>
+            </div>
+
+            <!-- Aylık Premium -->
+            <div class="vip-card premium">
+                <div class="badge-premium">EN POPÜLER</div>
+                <div class="vip-name">Aylık VIP</div>
+                <div class="vip-price">₺350,00</div>
+                <div class="vip-duration">aylık otomatik yenilenir</div>
+                <ul class="vip-features-list">
+                    <li>Tüm dizilere sınırsız erişim</li>
+                    <li>Sıfır reklam deneyimi</li>
+                    <li>Yeni bölümlere erken erişim</li>
+                    <li>FHD video oynatma kalitesi</li>
+                    <li>Destek önceliği</li>
+                </ul>
+                <a href="#" class="btn-vip-action">Aboneliği Başlat</a>
+            </div>
+
+            <!-- Yıllık -->
+            <div class="vip-card">
+                <div class="vip-name">Yıllık VIP</div>
+                <div class="vip-price">₺1.500,00</div>
+                <div class="vip-duration">yıllık otomatik yenilenir</div>
+                <ul class="vip-features-list">
+                    <li>Tüm dizilere sınırsız erişim</li>
+                    <li>Sıfır reklam deneyimi</li>
+                    <li>Yeni bölümlere erken erişim</li>
+                    <li>FHD video oynatma kalitesi</li>
+                    <li>En ekonomik paket</li>
+                </ul>
+                <a href="#" class="btn-vip-action">Paketi Seç</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Policies & Deletion Section -->
+    <section class="legal-wrapper" id="legal">
+        <div class="legal-container">
+            <div class="legal-tabs">
+                <h2>Kurumsal & Bilgi</h2>
+                <div class="tabs-list">
+                    <button class="tab-trigger active" id="tab-btn-privacy" onclick="switchTab('privacy')">
+                        Gizlilik Politikası <span class="arrow-indicator">→</span>
+                    </button>
+                    <button class="tab-trigger" id="tab-btn-terms" onclick="switchTab('terms')">
+                        Kullanım Koşulları <span class="arrow-indicator">→</span>
+                    </button>
+                    <button class="tab-trigger" id="tab-btn-delete-account" onclick="switchTab('delete-account')">
+                        🗑️ Hesap Silme Talebi <span class="arrow-indicator">→</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="legal-display">
+                <!-- Privacy Content -->
+                <div class="legal-panel active" id="pane-privacy">
+                    <h3>Gizlilik Politikası</h3>
+                    <div class="last-update">Son Güncelleme: 12 Mayıs 2026</div>
+                    <p>TR-Shorts olarak, uygulamamızı kullandığınız süre boyunca kişisel verilerinizin korunmasını önemsiyoruz. Bu politika, hangi verileri ne amaçla topladığımızı ve veri güvenliğini nasıl sağladığımızı açıklamaktadır.</p>
+                    
+                    <h4>1. Toplanan Veriler</h4>
+                    <p><strong>Kimlik ve Profil Bilgisi:</strong> Google ile Giriş yapıldığında, size profil oluşturmak ve VIP haklarınızı senkronize etmek için e-posta adresi ve benzersiz kullanıcı kimliği (User ID) işlenir.</p>
+                    <p><strong>Teşhis ve Hata Raporları:</strong> Uygulama kilitlenme raporları ve performans istatistikleri, uygulamadaki kararlılığı artırmak ve hataları hızlıca düzeltmek amacıyla anonim olarak işlenir.</p>
+                    <p><strong>Uygulama Etkinliği:</strong> İzleme geçmişiniz ve jeton hareketleriniz, size daha iyi içerik önermek ve satın alma haklarınızı doğrulamak için sistemde kayıtlı tutulur.</p>
+
+                    <h4>2. Verilerin Güvenliği</h4>
+                    <p>Toplanan tüm verileriniz yüksek şifrelemeli protokoller (HTTPS) kullanılarak Supabase güvenli bulut veritabanlarında saklanır ve yetkisiz erişimlere karşı korunur.</p>
+
+                    <h4>3. Üçüncü Taraf Paylaşımları</h4>
+                    <p>AdMob altyapısı, size ödüllü video reklam sunmak ve bunu doğrulamak amacıyla cihaz reklam kimliğinizi anonim olarak toplayabilir.</p>
+                </div>
+
+                <!-- Terms Content -->
+                <div class="legal-panel" id="pane-terms">
+                    <h3>Kullanım Koşulları</h3>
+                    <div class="last-update">Son Güncelleme: 12 Mayıs 2026</div>
+                    <p>TR-Shorts platformuna erişerek ve uygulamayı kullanarak aşağıdaki kullanım koşullarını kabul etmiş olursunuz.</p>
+                    
+                    <h4>1. VIP Abonelik</h4>
+                    <p>Tüm uygulama içi satın almalar Google Play Billing kütüphanesi entegrasyonu ile Google Play Store kanalları üzerinden tahsil edilir. İptaller ve geri ödemeler de Google Play politikalarına tabidir.</p>
+                    
+                    <h4>2. Otomatik Yenileme Şartları</h4>
+                    <p>Abonelikleriniz, mevcut dönemin bitiminden en az 24 saat önce Google Play abonelik ayarlarından iptal edilmediği sürece otomatik olarak yenilenir. Ödeme, yenilemeden 24 saat önce Google hesabınızdan tahsil edilir.</p>
+
+                    <h4>3. Telif Hakları</h4>
+                    <p>Uygulamada yayınlanan tüm özgün kısa dikey dizilerin telif hakları ArananFilms Production firmasına aittir. Herhangi bir içeriğin izinsiz kopyalanması, paylaşılması ve ticarileştirilmesi yasaktır.</p>
+                </div>
+
+                <!-- Account Deletion Content -->
+                <div class="legal-panel" id="pane-delete-account">
+                    <h3>Hesap ve Veri Silme Talebi</h3>
+                    <div class="last-update">TR-Shorts Kalıcı Veri Temizleme Kılavuzu</div>
+                    <p>Google Play politikaları gereğince ve kullanıcı haklarına olan saygımız doğrultusunda, hesabınızı ve bağlı verilerinizi dilediğiniz zaman kalıcı olarak silme hakkınız mevcuttur.</p>
+
+                    <h4>📱 1. Yöntem: Uygulama İçi Hesap Silme</h4>
+                    <p>Hesabınızı ve verilerinizi anında silmek için en güvenli yöntem uygulamayı kullanmaktır:</p>
+                    <p style="color: #fff; background: rgba(255, 255, 255, 0.02); padding: 16px; border-radius: 12px; border-left: 3px solid var(--primary); font-size: 14px; margin-bottom: 20px;">
+                        <strong>Profil</strong> sekmesi → Sayfanın altındaki <strong>"Hesabımı Kalıcı Olarak Sil"</strong> butonu → İşlemi onaylama.
+                    </p>
+
+                    <h4>✉️ 2. Yöntem: E-Posta ile Talep Gönderme</h4>
+                    <p>Uygulamayı sildiyseniz veya erişemiyorsanız, kayıtlı e-posta adresiniz üzerinden <a href="mailto:support@arananfilms.com" style="color: var(--primary); text-decoration: none; font-weight: 700;">support@arananfilms.com</a> adresine başlığı "Hesap Silme Talebi" olan bir e-posta göndererek hesabınızın silinmesini talep edebilirsiniz. Talebiniz 7 iş günü içerisinde yerine getirilir.</p>
+
+                    <h4>📂 Silinen Veriler Hangileridir?</h4>
+                    <p>Hesap profiliniz, Google Auth kimlik bağlantısı, izleme geçmişiniz, VIP üyelik haklarınız ve jeton bilgileriniz veritabanımızdan geri döndürülemeyecek şekilde tamamen silinir. Mali yasal defterler haricinde hiçbir veriniz saklanmaz.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="footer-cols">
+            <div class="footer-info">
+                <a href="#" class="logo">
+                    <span class="logo-text">TR<span>SHORTS</span></span>
+                </a>
+                <p>TR-Shorts, en yüksek kalitede dikey kısa dramaları cep telefonunuza getiren öncü dikey video platformudur.</p>
+            </div>
+            <div class="footer-nav-groups">
+                <div class="nav-group">
+                    <h6>Navigasyon</h6>
+                    <ul>
+                        <li><a href="#about">Hakkımızda</a></li>
+                        <li><a href="#diziler">Popüler Diziler</a></li>
+                        <li><a href="#features">Özellikler</a></li>
+                    </ul>
+                </div>
+                <div class="nav-group">
+                    <h6>Yasal Bilgi</h6>
+                    <ul>
+                        <li><a href="#legal" onclick="switchTab('privacy')">Gizlilik Politikası</a></li>
+                        <li><a href="#legal" onclick="switchTab('terms')">Kullanım Koşulları</a></li>
+                        <li><a href="#legal" onclick="switchTab('delete-account')">Hesap Silme</a></li>
+                    </ul>
+                </div>
+                <div class="nav-group">
+                    <h6>İletişim</h6>
+                    <ul>
+                        <li><a href="mailto:support@arananfilms.com">support@arananfilms.com</a></li>
+                        <li>Konum: İstanbul, Türkiye</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom-row">
+            <p>&copy; 2026 ArananFilms Production. Tüm Hakları Saklıdır.</p>
+            <p>Design and Coding by Antigravity AI</p>
         </div>
     </footer>
 
+    <!-- Header & Tabs Logic -->
+    <script>
+        const header = document.getElementById('main-header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-trigger').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.legal-panel').forEach(pane => pane.classList.remove('active'));
+
+            const targetBtn = document.getElementById('tab-btn-' + tabId);
+            const targetPane = document.getElementById('pane-' + tabId);
+            
+            if (targetBtn && targetPane) {
+                targetBtn.classList.add('active');
+                targetPane.classList.add('active');
+            }
+        }
+    </script>
 </body>
 </html>
